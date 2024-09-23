@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * Create By ${} on 22/09/2024
  *
@@ -40,6 +42,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public List<TodoDto> getAllTodos() {
-        return List.of();
+        List<Todo> todos = todoRepository.findAll();
+        return todos.stream().map((todo) -> modelMapper.map(todo, TodoDto.class)).collect(toList());
     }
 }

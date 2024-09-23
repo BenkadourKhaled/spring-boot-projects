@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Create By ${} on 22/09/2024
  *
@@ -33,6 +35,11 @@ public class TodoController {
     public ResponseEntity<TodoDto> getTodo(@PathVariable Long id) {
         TodoDto todoDto = todoService.getTodoById(id);
         return new ResponseEntity<>(todoDto, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/all")
+    public ResponseEntity<List<TodoDto>> getTodoList() {
+        return new ResponseEntity<>(todoService.getAllTodos(), HttpStatus.OK);
     }
 
 }
