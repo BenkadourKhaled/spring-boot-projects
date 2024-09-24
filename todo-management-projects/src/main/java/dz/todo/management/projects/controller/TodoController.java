@@ -3,6 +3,7 @@ package dz.todo.management.projects.controller;
 import dz.todo.management.projects.dto.TodoDto;
 import dz.todo.management.projects.service.TodoService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,12 @@ public class TodoController {
     @GetMapping(path = "/all")
     public ResponseEntity<List<TodoDto>> getTodoList() {
         return new ResponseEntity<>(todoService.getAllTodos(), HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<TodoDto> updateTodo(@PathVariable Long id, @RequestBody TodoDto todoDto) throws ChangeSetPersister.NotFoundException {
+        TodoDto updatedTodo = todoService.updateTodo(id, todoDto);
+        return new ResponseEntity<>(updatedTodo, HttpStatus.OK);
     }
 
 }

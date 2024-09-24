@@ -1,6 +1,7 @@
 package dz.todo.management.projects.service;
 
 import dz.todo.management.projects.dto.TodoDto;
+import org.springframework.data.crossstore.ChangeSetPersister;
 
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface TodoService {
     TodoDto addTodo(TodoDto todoDto);
     List<TodoDto> getAllTodos();
     TodoDto getTodoById(Long id);
+    TodoDto updateTodo(Long id, TodoDto todoDto) throws ChangeSetPersister.NotFoundException;
 }
