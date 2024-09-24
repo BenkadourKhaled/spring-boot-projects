@@ -1,4 +1,5 @@
 package dz.todo.management.projects.service.impl;
+
 import dz.todo.management.projects.dto.TodoDto;
 import dz.todo.management.projects.entity.Todo;
 import dz.todo.management.projects.repository.TodoRepository;
@@ -7,7 +8,9 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+
 import static java.util.stream.Collectors.toList;
 /**
  * Create By ${} on 22/09/2024
@@ -50,5 +53,11 @@ public class TodoServiceImpl implements TodoService {
     public List<TodoDto> getAllTodos() {
         List<Todo> todos = todoRepository.findAll();
         return todos.stream().map((todo) -> modelMapper.map(todo, TodoDto.class)).collect(toList());
+    }
+
+    @Override
+    public void deleteTodo(Long id) throws ChangeSetPersister.NotFoundException {
+        Todo oldTodo = todoRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
+        todoRepository.deleteById(oldTodo.getId());
     }
 }

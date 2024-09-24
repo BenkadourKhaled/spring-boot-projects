@@ -49,4 +49,11 @@ public class TodoController {
         return new ResponseEntity<>(updatedTodo, HttpStatus.OK);
     }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<String> deleteTodo(@PathVariable Long id) throws ChangeSetPersister.NotFoundException {
+        todoService.deleteTodo(id);
+        return new ResponseEntity<>("Todo Deleted Successfully !.", HttpStatus.OK);
+    }
+
+
 }
