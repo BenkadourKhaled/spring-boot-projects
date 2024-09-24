@@ -55,8 +55,8 @@ public class TodoController {
         return new ResponseEntity<>("Todo Deleted Successfully !.", HttpStatus.OK);
     }
 
-    @PatchMapping(path = "/{todoId}")
-    public ResponseEntity<TodoDto> completedTodo(@PathVariable Long todoId) throws ChangeSetPersister.NotFoundException {
+    @PatchMapping(path = "/{id}/completed")
+    public ResponseEntity<TodoDto> completedTodo(@PathVariable(value = "id") Long todoId) throws ChangeSetPersister.NotFoundException {
         TodoDto updatedTodo = todoService.completeTodo(todoId);
         return new ResponseEntity<>(updatedTodo,HttpStatus.OK);
     }
