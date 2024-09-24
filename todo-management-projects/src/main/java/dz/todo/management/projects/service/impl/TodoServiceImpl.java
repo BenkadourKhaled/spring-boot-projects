@@ -67,4 +67,11 @@ public class TodoServiceImpl implements TodoService {
         oldTodo.setCompleted(Boolean.TRUE);
         return modelMapper.map(todoRepository.save(oldTodo), TodoDto.class);
     }
+
+    @Override
+    public TodoDto inCompleteTodo(Long id) throws ChangeSetPersister.NotFoundException {
+        Todo oldTodo = todoRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
+        oldTodo.setCompleted(Boolean.FALSE);
+        return modelMapper.map(todoRepository.save(oldTodo), TodoDto.class);
+    }
 }

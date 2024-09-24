@@ -21,6 +21,6 @@ public interface TodoService {
     TodoDto getTodoById(Long id);
     TodoDto updateTodo(Long id, TodoDto todoDto) throws ChangeSetPersister.NotFoundException;
     void deleteTodo(Long id) throws ChangeSetPersister.NotFoundException;
-
     TodoDto completeTodo(Long id) throws ChangeSetPersister.NotFoundException;
+    TodoDto inCompleteTodo(Long id) throws ChangeSetPersister.NotFoundException;
 }

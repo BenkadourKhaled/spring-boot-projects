@@ -61,5 +61,11 @@ public class TodoController {
         return new ResponseEntity<>(updatedTodo,HttpStatus.OK);
     }
 
+    @PatchMapping(path = "/{id}/in-completed")
+    public ResponseEntity<TodoDto>inCompleteTodo(@PathVariable(value = "id") Long todoId) throws ChangeSetPersister.NotFoundException {
+        TodoDto updatedTodo = todoService.completeTodo(todoId);
+        return new ResponseEntity<>(updatedTodo,HttpStatus.OK);
+    }
+
 
 }
